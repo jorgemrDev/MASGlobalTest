@@ -1,0 +1,42 @@
+<div style="text-align:center; background-color: #eee2e2">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+<h4 style="text-align:center">List of MAS Global employees: </h4>
+
+</div>
+<div class="row">
+  <div class="col-md-4"> 
+    <input [(ngModel)]="idToFind"/>
+    <input type="button" class="btn btn-primary" value="Find" (click)="getEmployees()" />
+  </div>
+</div>
+
+ <div id="container" >
+      <table class="table table-hover table-striped">
+          <thead class="thead-dark" style="background-color:#eee2e2">
+            <tr>              
+              <th>ID</th>
+              <th>Employee Name</th>
+              <th>Contract Type</th>               
+              <th>Role Id</th>               
+              <th>Role Name</th>               
+              <th>Role Description</th>               
+              <th>Hourly Salary</th>               
+              <th>Monthly Salary</th>               
+              <th>Annual Salary</th>
+            </tr>
+          </thead>
+        <tr *ngFor="let employee of employees">
+            <td>   {{ employee.id }}  </td> 
+          <td>   {{ employee.name }}  </td> 
+          <td>   {{ employee.contractTypeName }}  </td> 
+          <td>   {{ employee.roleId }}  </td> 
+          <td>   {{ employee.roleName }}  </td> 
+          <td>   {{ employee.roleDescription }}  </td> 
+          <td>   {{ employee.hourlySalary }}  </td> 
+          <td>   {{ employee.monthlySalary }}  </td> 
+          <td>   {{ employee.annualSalary }}  </td> 
+        </tr>       
+      </table>
+</div>
