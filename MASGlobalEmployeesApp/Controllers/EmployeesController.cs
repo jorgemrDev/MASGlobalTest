@@ -20,18 +20,26 @@ namespace MASGlobalEmployeesApp.Controllers
         public HttpResponseMessage GetEmployees(string id = null)
         {
             List<EmployeeDTO> lstEmployees;
-            if (id == null)
+            try
             {
-                lstEmployees = _employeesService.GetUsersAll();                
+                if (id == null)
+                {
+                    lstEmployees = _employeesService.GetUsersAll();
+                }
+                else
+                {
+                    lstEmployees = _employeesService.GetUserById(Convert.ToInt32(id));
+                }
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, lstEmployees);
+                response.Headers.Add("Access-Control-Allow-Origin", "*");
+                return response;
             }
-            else
+            catch (Exception)
             {
-                lstEmployees = _employeesService.GetUserById(Convert.ToInt32(id));
+                HttpResponseMessage errResponse = Request.CreateResponse(HttpStatusCode.InternalServerError, "There was an error with you request");
+                errResponse.Headers.Add("Access-Control-Allow-Origin", "*");
+                return errResponse;
             }
-            
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, lstEmployees);
-            response.Headers.Add("Access-Control-Allow-Origin", "*");
-            return response;
         }
     }
 }
